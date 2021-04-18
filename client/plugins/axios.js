@@ -10,8 +10,8 @@ export default function ({ $axios, redirect, app, store }, inject) {
     })
 
     // Set baseURL to something different
-    // api.setBaseURL('http://localhost:5000/api')
-    api.setBaseURL('http://localhost:3050/api')
+    api.setBaseURL('http://localhost:5000/api')
+    // api.setBaseURL('http://localhost:3050/api')
 
 
 
