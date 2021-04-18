@@ -1,0 +1,13 @@
+{
+  "db": {
+    "host": "mongo",
+    "port": 27017,
+    "url": "",
+    "database": "asignment-main",
+    "password": "",
+    "name": "db",
+    "user": "",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
+  }
+}
