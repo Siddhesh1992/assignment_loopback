@@ -4,12 +4,28 @@
       <div class="login-form">
         <form @submit.prevent="login">
           <h2 class="text-center">{{ title }}</h2>
+          <div v-if="title != 'Login'" class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              v-model="username"
+              placeholder="Username"
+            />
+            <div class="error">
+              {{
+                errors.username || getErrors.username
+                  ? getErrors.username[0]
+                  : ""
+              }}
+            </div>
+          </div>
+
           <div class="form-group">
             <input
               type="text"
               class="form-control"
               v-model="email"
-              placeholder="Username"
+              placeholder="Email"
             />
             <div class="error">
               {{ errors.email || getErrors.email ? getErrors.email[0] : "" }}
@@ -24,6 +40,7 @@
             />
             <div class="error">{{ errors.password }}</div>
           </div>
+
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">
               {{ title === "Login" ? "Login" : "Create an account" }}
@@ -51,8 +68,10 @@ export default {
     return {
       title: "Login",
       email: "",
+      username: "",
       password: "",
       errors: {
+        username: "",
         email: "",
         password: "",
       },
@@ -69,6 +88,7 @@ export default {
     async login(e) {
       this.errors.email = "";
       this.errors.password = "";
+      this.errors.username = "";
 
       let count = 0;
       if (this.email.trim().length == 0) {

@@ -14,7 +14,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li v-if="getUser" class="nav-item">
+        <li v-if="getHeaderInfo" class="nav-item">
           <nuxt-link class="nav-link" to="#"
             >Home <span class="sr-only">(current)</span></nuxt-link
           >
@@ -22,9 +22,9 @@
       </ul>
       <div>
         <b-dropdown
-          v-if="getUser"
+          v-if="getHeaderInfo"
           id="dropdown-divider"
-          :text="getUser"
+          :text="getHeaderInfo"
           class="m-2"
         >
           <b-dropdown-item-button @click="logout"
@@ -40,14 +40,14 @@
 <script>
 export default {
   validate({ params }) {
-    if (!this.$store.getters.getUser) {
+    if (!this.$store.getters.getHeaderInfo) {
       this.$router.replace("/");
     }
     return true;
   },
   computed: {
-    getUser() {
-      return this.$store.getters.getUser.username;
+    getHeaderInfo() {
+      return this.$store.getters.getHeaderInfo;
     },
   },
 

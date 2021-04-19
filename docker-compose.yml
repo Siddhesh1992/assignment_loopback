@@ -12,6 +12,8 @@ services:
         restart: always
         volumes:
             - ./db:/data/db
+        ports:
+            - 27017:27017
     client:
         build:
             dockerfile: Dockerfile

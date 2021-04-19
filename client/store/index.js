@@ -1,6 +1,7 @@
 export const state = () => ({
-    user: "",
+    user: process.server ? '' : !!localStorage.getItem('user'),
     errors: "",
+    headerInfo: "",
 });
 
 //getters
@@ -10,6 +11,10 @@ export const getters = {
     },
     getErrors: state => {
         return state.errors;
+    },
+
+    getHeaderInfo: state => {
+        return state.headerInfo;
     }
 }
 
@@ -19,14 +24,11 @@ export const actions = {
 
         const user = await this.$api.post('/Users/login', { ...payload });
 
-        const { id, userId } = user.data;
-
-        const userDet = await this.$api.get(`/Users/${userId}?access_token=${id}`);
-
-        context.commit('setLoginUser', { ...userDet.data, ...user.data });
+        context.commit('setLoginUser', { ...user.data });
     },
     async signup(context, payload) {
         context.commit('setSignupUser', await this.$api.post('/Users', { ...payload }));
+
     },
     async error(context, payload) {
         context.commit('setError', payload)
@@ -42,11 +44,11 @@ export const mutations = {
     setLoginUser(state, user) {
 
         state.user = user;
+        localStorage.setItem('user', user);
         this.$router.replace('/user');
     },
     setSignupUser(state, user) {
-        state.user = user;
-
+        swal("sign up successfully login to your new account");
     },
     setLogout(state) {
         state.user = "";
@@ -54,6 +56,9 @@ export const mutations = {
     },
     setError(state, error) {
         state.errors = error;
+    },
+    setHeaderInfo(state, user) {
+        state.headerInfo = user;
     }
 
 }
