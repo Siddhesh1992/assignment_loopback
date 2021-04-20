@@ -72,7 +72,7 @@ module.exports = function (Transaction) {
 
     Transaction.remoteMethod('getTransaction', {
         description: "this is desicriptions",
-        http: { "verb": "post", "path": "/get-transaction" },
+        http: { "verb": "get", "path": "/get-transaction" },
         accepts: [
             { "arg": "ctx", "type": "object", "http": { source: "context" } },
             { "arg": "options", "type": "object", "http": "optionsFromRequest" },

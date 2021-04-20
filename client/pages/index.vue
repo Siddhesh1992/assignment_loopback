@@ -1,6 +1,6 @@
 <template>
   <div class="container main-container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       <div class="login-form">
         <form @submit.prevent="login">
           <h2 class="text-center">{{ title }}</h2>
@@ -113,12 +113,12 @@ export default {
       } else {
         this.$store.dispatch("signup", {
           email: this.email,
+          username: this.username,
           password: this.password,
         });
       }
     },
     changeTitle() {
-      alert(this.title);
       this.title = this.title == "Login" ? "Create an account" : "Login";
     },
   },

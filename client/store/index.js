@@ -45,13 +45,16 @@ export const mutations = {
 
         state.user = user;
         localStorage.setItem('user', user);
+        if (!process.server) { localStorage.setItem('user', user); }
         this.$router.replace('/user');
     },
     setSignupUser(state, user) {
         swal("sign up successfully login to your new account");
     },
     setLogout(state) {
+        if (!process.server) { localStorage.setItem('user', ""); }
         state.user = "";
+        state.headerInfo = "";
 
     },
     setError(state, error) {

@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <nuxt-link class="navbar-brand" to="#">Assignment</nuxt-link>
+    <h2 class="navbar-brand">Assignment</h2>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li v-if="getHeaderInfo" class="nav-item">
-          <nuxt-link class="nav-link" to="#"
+          <nuxt-link class="nav-link" to="/"
             >Home <span class="sr-only">(current)</span></nuxt-link
           >
         </li>
@@ -40,9 +40,9 @@
 <script>
 export default {
   validate({ params }) {
-    if (!this.$store.getters.getHeaderInfo) {
-      this.$router.replace("/");
-    }
+    // if (!this.$store.getters.getHeaderInfo) {
+    //   this.$router.replace("/");
+    // }
     return true;
   },
   computed: {
