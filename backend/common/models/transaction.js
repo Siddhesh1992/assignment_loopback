@@ -1,7 +1,8 @@
 'use strict';
 
-var app = require('../../server/server');
-var User = app.models.user;
+const moment = require('moment');
+const app = require('../../server/server');
+const User = app.models.user;
 
 module.exports = function (Transaction) {
 
@@ -59,7 +60,7 @@ module.exports = function (Transaction) {
             {
                 userId: userId,
                 created_at: {
-                    between: [new Date(startDate), new Date(endDate)]
+                    between: [moment(startDate, 'DD-MM-YYYY').toDate(), moment(endDate, 'DD-MM-YYYY').toDate()]
                 }
             } : { userId: userId };
         const trans = await Transaction.find({

@@ -12,8 +12,6 @@ services:
         restart: always
         volumes:
             - ./db:/data/db
-        ports:
-            - 27017:27017
     client:
         build:
             dockerfile: Dockerfile
@@ -33,7 +31,5 @@ services:
             - ./backend:/app
         depends_on: 
             - mongo
-        ports: 
-            - 5000:5000
                 
         

@@ -2,8 +2,8 @@
 <template>
   <div>
     <div class="container">
-      <div class="row row-style">
-        <div class="col-md-2">
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
           <client-only
             ><date-picker
               placeholder="Start Date"
@@ -12,16 +12,18 @@
           /></client-only>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-4">
           <client-only
             ><date-picker
               placeholder="End Date"
               format="dd-MM-yyyy"
               v-model="endDate"
           /></client-only>
+          <i @click="fetchTrans" class="fas fa-search custom-position"></i>
         </div>
-        <div class="col-md-4 float-left">
-          <NuxtLink to="/user/create-transaction"
+
+        <div class="col-xs-12 col-4 float-right">
+          <NuxtLink class="float-right" to="/user/create-transaction"
             ><i class="fas fa-plus-circle"></i
           ></NuxtLink>
         </div>
@@ -82,11 +84,13 @@ export default {
   middleware: ["auth"],
   methods: {
     async fetchTrans() {
+      debugger;
       const { id, userId } = this.$store.getters.getUser;
+      let url = `/transactions/get-transaction?access_token=${id}`;
+      if (this.startDate && this.endDate)
+        url = `/transactions/get-transaction?access_token=${id}&startDate=${this.startDate.toISOString()}&endDate=${this.endDate.toISOString()}`;
 
-      const userTrans = (
-        await this.$api.get(`/transactions/get-transaction?access_token=${id}`)
-      ).data;
+      const userTrans = (await this.$api.get(url)).data;
 
       this.userTrans = userTrans;
     },
@@ -113,5 +117,10 @@ export default {
 <style scoped>
 .row-style {
   width: 100%;
+}
+.custom-position {
+  position: absolute;
+  top: 6px;
+  left: 167px;
 }
 </style>
